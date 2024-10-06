@@ -158,39 +158,138 @@ function getQuotationMarks() : [string, string]{
     }
 }
 
+export function token(text : string) : string {
+    const [start_mark, end_mark] = getQuotationMarks();
+    return start_mark + text + end_mark;
+}
+
 export interface Readable {
     reading() : Reading;
+    highlight(on : boolean) : void;
 }
 
 export class Reading {
+    readable : Readable;
+    originalText : string;
     text : string;
     args : Readable[];
+    children : Reading[];
+    phrases : (string | Reading)[] = [];
+    start : number = NaN;
+    end   : number = NaN;
 
     static setTranslation(translation_arg : Map<string, string>){
         translation = translation_arg;
     }
 
-    constructor(text : string, args : Readable[]){
-        this.text = text;
+    constructor(readable : Readable, original_text : string, args : Readable[]){
+        this.readable = readable;
+        this.originalText = original_text;
+        if(translation != undefined && translation.has(original_text)){
+            this.text = translation.get(original_text)!;
+        }
+        else{
+            this.text = original_text;
+        }
+
         this.args = args;
+        this.children = args.map(x => x.reading());
     }
 
-    toString() : string {
-        let text = this.text;
+    setPhrases(){
+        if(this.children.length == 0){
 
-        if(translation != undefined && translation.has(this.text)){
-            text = translation.get(text)!;
+            this.phrases = [ this.text ];
         }
+        else{
+            const quotes = range(this.children.length).map(i => token( upperLatinLetters.charAt(i) ));
+            const positions = quotes.map(x => this.text.indexOf(x));
+            assert(positions.every(i => i != -1));
+    
+            const index_positions = Array.from(positions.entries());
+            index_positions.sort((a, b)=> a[1] - b[1]);
 
-        const marks = getQuotationMarks();
-        for(const i of range(this.args.length)){
-            const c = '"' + upperLatinLetters[i] + '"';
-            const reading = marks[0] + this.args[i].reading().toString() + marks[1];
-            text = text!.replace(c, reading);
+            let pos = 0;
+            for(const [index, position] of index_positions){
+
+                if(pos < position){
+                    this.phrases.push(this.text.substring(pos, position));
+                }
+
+                this.phrases.push(this.children[index]);
+    
+                pos = position + quotes[index].length;
+            }
+    
+            if(pos < this.text.length){
+                this.phrases.push(this.text.substring(pos));
+            }
         }
-
-        return text;
     }
+
+    setStartEnd(start : number) {
+        if(this.children.length == 0){
+            this.start = start;
+            this.end   = start + this.text.length;
+        }
+        else{
+            let pos = start;
+            for(const phrase of this.phrases){
+                if(typeof phrase == "string"){
+
+                    pos += phrase.length;
+                }
+                else{
+
+                    phrase.setStartEnd(pos);
+                    pos = phrase.end;
+                }
+            }
+        }
+    }
+
+    getAllTexts(texts: string[]){
+        if(this.children.length == 0){
+            texts.push(this.text);
+        }
+        else{
+            for(const phrase of this.phrases){
+                if(typeof phrase == "string"){
+
+                    texts.push(phrase);
+                }
+                else{
+
+                    phrase.getAllTexts(texts);
+                }
+            }
+        }
+    }
+
+    getText() : string {
+        this.setPhrases();
+        this.setStartEnd(0);
+
+        const texts : string[] = [];
+        this.getAllTexts(texts);
+
+        const all_text = texts.join("");
+
+        return all_text;
+    }
+
+    getAllReadingsSub(readings: Reading[]){
+        readings.push(this);
+        this.children.forEach(x => x.getAllReadingsSub(readings));
+    }
+
+    getAllReadings() : Reading[] {
+        const readings: Reading[] = [];
+        this.getAllReadingsSub(readings);
+
+        return readings;
+    }
+
 }
 
 export async function initI18n(){
