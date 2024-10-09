@@ -290,7 +290,7 @@ export class Reading {
         }
     }
 
-    getText() : string {
+    prepareReading() : string {
         this.setPhrases();
         this.setStartEnd(0);
 
