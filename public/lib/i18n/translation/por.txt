@@ -1,0 +1,32 @@
+0: Desenhe uma linha do ponto "A" ao ponto "B".
+1: Desenhe uma linha através do ponto "A" que seja paralela à linha "B".
+2: Desenhe um círculo com o ponto "A" como centro.
+3: Desenhe um triângulo com vértices "A", "B" e "C".
+4: Desenhe um quadrilátero com vértices "A", "B", "C" e "D".
+5: Seja "A" o ponto médio entre os pontos "B" e "C".
+6: Seja "A" o pé da linha perpendicular desenhada do ponto "B" à linha "C".
+7: Seja "A" o ponto de intersecção das duas linhas.
+8: Sejam os pontos "A" e "B" as intersecções da linha e do círculo.
+9: Sejam os pontos "A" e "B" as intersecções dos dois círculos.
+10: Desenhe tangentes aos dois círculos.
+11: Desenhe uma reta tangente do ponto "A" ao círculo, e deixe que os pontos de tangência sejam os pontos "B" e "C".
+12:seleção
+13:ponto
+14:ponto médio
+15:interseção
+16:segmento de reta
+17:meia reta
+18:linha
+19:polígono
+20:perpendicular
+21:reta paralela
+22:círculo por ponto
+23:círculo por raio
+24:arco
+25:elipse
+26:ângulo
+27:linha de dimensão
+28:símbolo de comprimento
+29:círculos tangentes
+30:ponto tangente
+31:texto

@@ -1,0 +1,32 @@
+0 : Tracez une ligne du point « A » au point « B ».
+1 : Tracez une ligne passant par le point « A » et parallèle à la ligne « B ».
+2 : Tracez un cercle dont le point « A » est le centre.
+3 : Tracez un triangle dont les sommets sont « A », « B » et « C ».
+4 : Tracez un quadrilatère dont les sommets sont « A », « B », « C » et « D ».
+5 : Soit « A » le point médian entre les points « B » et « C ».
+6 : Soit « A » le pied de la ligne perpendiculaire tracée du point « B » à la ligne « C ».
+7 : Soit « A » le point d'intersection des deux lignes.
+8 : Soit les points « A » et « B » les intersections de la ligne et du cercle.
+9 : Soit les points « A » et « B » les intersections des deux cercles.
+10 : Tracez des tangentes aux deux cercles.
+11 : Tracez une ligne tangente du point « A » au cercle, et que les points de tangence soient les points « B » et « C ».
+12 : sélection
+13 : point
+14 : point médian
+15 : intersection
+16 : segment de ligne
+17 : demi-ligne
+18 : ligne
+19 : polygone
+20 : perpendiculaire
+21 : ligne parallèle
+22 : cercle par point
+23 : cercle par rayon
+24 : arc
+25 : ellipse
+26 : angle
+27 : ligne de cote
+28 : symbole de longueur
+29 : cercles tangents
+30 : point tangent
+31 : texte

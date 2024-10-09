@@ -1,0 +1,32 @@
+0:Zeichnen Sie eine Linie von Punkt „A“ zu Punkt „B“.
+1:Zeichnen Sie eine Linie durch Punkt „A“, die parallel zu Linie „B“ ist.
+2:Zeichnen Sie einen Kreis mit Punkt „A“ als Mittelpunkt.
+3:Zeichnen Sie ein Dreieck mit den Eckpunkten „A“, „B“ und „C“.
+4:Zeichnen Sie ein Viereck mit den Eckpunkten „A“, „B“, „C“ und „D“.
+5:Lassen Sie „A“ den Mittelpunkt zwischen den Punkten „B“ und „C“ sein.
+6:Lassen Sie „A“ den Fußpunkt der senkrechten Linie sein, die von Punkt „B“ zur Linie „C“ gezogen wird.
+7:Lassen Sie „A“ den Schnittpunkt der beiden Linien sein.
+8:Lassen Sie die Punkte „A“ und „B“ die Schnittpunkte der Linie und des Kreises sein.
+9:Lassen Sie die Punkte „A“ und „B“ die Schnittpunkte der beiden Kreise sein.
+10:Zeichnen Sie Tangenten an die beiden Kreise.
+11:Zeichnen Sie eine Tangente vom Punkt „A“ zum Kreis und lassen Sie die Tangentenpunkte die Punkte „B“ und „C“ sein.
+12:Auswahl
+13:Punkt
+14:Mittelpunkt
+15:Schnittpunkt
+16:Liniensegment
+17:Halblinie
+18:Linie
+19:Polygon
+20:Senkrecht
+21:Parallele Linie
+22:Kreis nach Punkt
+23:Kreis nach Radius
+24:Bogen
+25:Ellipse
+26:Winkel
+27:Maßlinie
+28:Längensymbol
+29:Tangentenkreise
+30:Tangentenpunkt
+31:Text

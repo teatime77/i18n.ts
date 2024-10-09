@@ -1,0 +1,32 @@
+0: Gambarlah garis dari titik "A" ke titik "B".
+1: Gambarlah garis melalui titik "A" yang sejajar dengan garis "B".
+2: Gambarlah lingkaran dengan titik "A" sebagai pusatnya.
+3: Gambarlah segitiga dengan titik sudut "A", "B", dan "C".
+4: Gambarlah segi empat dengan titik sudut "A", "B", "C", dan "D".
+5: Misalkan "A" adalah titik tengah antara titik "B" dan "C".
+6: Misalkan "A" adalah kaki garis tegak lurus yang ditarik dari titik "B" ke garis "C".
+7: Misalkan "A" adalah titik potong kedua garis tersebut.
+8: Misalkan titik "A" dan "B" adalah titik potong garis dan lingkaran.
+9: Misalkan titik "A" dan "B" adalah titik potong kedua lingkaran.
+10: Gambarlah garis singgung kedua lingkaran tersebut.
+11: Gambarkan garis singgung dari titik "A" ke lingkaran, dan biarkan titik singgungnya menjadi titik "B" dan "C".
+12:seleksi
+13:titik
+14:titik tengah
+15:persimpangan
+16:ruas garis
+17:setengah garis
+18:garis
+19:poligon
+20:tegak lurus
+21:garis sejajar
+22:lingkaran menurut titik
+23:lingkaran menurut jari-jari
+24:busur
+25:elips
+26:sudut
+27:garis dimensi
+28:simbol panjang
+29:lingkaran singgung
+30:titik singgung
+31:teks

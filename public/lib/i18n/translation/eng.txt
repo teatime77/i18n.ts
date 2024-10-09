@@ -1,0 +1,32 @@
+0:Draw a line from point "A" to point "B".
+1:Draw a line through point "A" that is parallel to line "B".
+2:Draw a circle with point "A" as the center.
+3:Draw a triangle with vertices "A", "B", and "C".
+4:Draw a quadrilateral with vertices "A", "B", "C" and "D".
+5:Let "A" be the midpoint between points "B" and "C".
+6:Let "A" be the foot of the perpendicular line drawn from point "B" to the line "C".
+7:Let "A" be the intersection point of the two lines.
+8:Let points "A" and "B" be the intersections of the line and the circle.
+9:Let points "A" and "B" be the intersections of the two circles.
+10:Draw tangents to the two circles.
+11:Draw a tangent line from point "A" to the circle, and let the points of tangency be points "B" and "C".
+12:selection
+13:point
+14:mid point
+15:intersection
+16:line segment
+17:half line
+18:line
+19:polygon
+20:perpendicular
+21:parallel line
+22:circle by point
+23:circle by radius
+24:arc
+25:ellipse
+26:angle
+27:dimension line
+28:length symbol
+29:tangent circles
+30:tangent point
+31:text

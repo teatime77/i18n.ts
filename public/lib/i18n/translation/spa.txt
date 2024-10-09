@@ -1,0 +1,32 @@
+0: Traza una línea desde el punto "A" hasta el punto "B".
+1: Traza una línea que pase por el punto "A" y que sea paralela a la línea "B".
+2: Traza un círculo cuyo punto "A" sea el centro.
+3: Traza un triángulo con los vértices "A", "B" y "C".
+4: Traza un cuadrilátero con los vértices "A", "B", "C" y "D".
+5: Sea "A" el punto medio entre los puntos "B" y "C".
+6: Sea "A" el pie de la línea perpendicular trazada desde el punto "B" hasta la línea "C".
+7: Sea "A" el punto de intersección de las dos líneas.
+8: Sean los puntos "A" y "B" las intersecciones de la línea y el círculo.
+9: Sean los puntos "A" y "B" las intersecciones de los dos círculos.
+10: Traza tangentes a los dos círculos.
+11: Dibuje una línea tangente desde el punto "A" hasta el círculo, y sea los puntos de tangencia los puntos "B" y "C".
+12: selección
+13: punto
+14: punto medio
+15: intersección
+16: segmento de línea
+17: media línea
+18: línea
+19: polígono
+20: perpendicular
+21: línea paralela
+22: círculo por punto
+23: círculo por radio
+24: arco
+25: elipse
+26: ángulo
+27: línea de dimensión
+28: símbolo de longitud
+29: círculos tangentes
+30: punto tangente
+31: texto

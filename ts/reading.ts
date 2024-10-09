@@ -1,6 +1,8 @@
 namespace i18n_ts {
-//
-let languageCode : string = "eng";
+
+let homeURL : string;
+
+export let languageCode : string = "eng";
 
 export let  upperLatinLetters : string;
 export let  lowerLatinLetters : string;
@@ -9,13 +11,25 @@ export let  latinLetters : string;
 export let  upperGreekLetters : string;
 export let  lowerGreekLetters : string;
 
+const languages : ([string, string, [string,string]])[] = [
+    [ "اَلْعَرَبِيَّةُ", "ara", ['"', '"']],
+    [ "汉语", "chi", ['“', '”']],
+    [ "English", "eng", ['"', '"']],
+    [ "français", "fre", ['« ', ' »']],
+    [ "Deutsch", "ger", ['„', '“']],
+    [ "हिन्दी", "hin", ['"', '"']],
+    [ "Indonesia", "ind", ['"', '"']],
+    [ "日本語", "jpn", ['「', '」']],
+    [ "한국어", "kor", ['"', '"']],
+    [ "Русский", "rus", ['«', '»']],
+    [ "español", "spa", ['"', '"']],
+]
 
 /**
 Quotation mark
     https://en.wikipedia.org/wiki/Quotation_mark
  */
 let quotationMarks = new Map<string, [string, string]>([
-    [ "", ["", ""]],
 ]);
 
 /*
@@ -27,6 +41,7 @@ Bengali	bn	ben	ben
 Burmese	my	mya	bur
 Chinese	zh	zho	chi
 Dutch	nl	nld	dut
+English	en	eng	eng
 French	    fr	fra	fre
 German	    de	deu	ger
 Greek	    el	ell	gre
@@ -71,7 +86,7 @@ Internet users by language
 
 */
 
-let translation : Map<string, string> = new Map<string, string>();
+let translationMap : Map<string, string> = new Map<string, string>();
 
 
 function initLetters(){
@@ -143,8 +158,15 @@ export async function getAllTexts() {
 }
 
 export function T(text : string) : string {
-    const target = translation.get(text);
-    return target != undefined ? target : text;
+    text = text.trim();
+    const target = translationMap.get(text);
+    if(target == undefined){
+        msg(`src:[${text.trim()}]`);
+        for(const t of translationMap.keys()){
+            msg(`src:[${t.trim()}]`);
+        }
+    }
+    return target != undefined ? target.trim() : text;
 }
 
 
@@ -159,6 +181,18 @@ function getQuotationMarks() : [string, string]{
 }
 
 export function token(text : string) : string {
+    if(languageCode == "ara"){
+        switch("ABCDE".indexOf(text)){
+        case 0: return "أ";
+        case 1: return "ب";
+        case 2: return "ج";
+        case 3: return "د";
+        case 4: return "هـ";
+        }
+
+        throw new MyError();
+    }
+
     const [start_mark, end_mark] = getQuotationMarks();
     return start_mark + text + end_mark;
 }
@@ -170,7 +204,6 @@ export interface Readable {
 
 export class Reading {
     readable : Readable;
-    originalText : string;
     text : string;
     args : Readable[];
     children : Reading[];
@@ -178,19 +211,10 @@ export class Reading {
     start : number = NaN;
     end   : number = NaN;
 
-    static setTranslation(translation_arg : Map<string, string>){
-        translation = translation_arg;
-    }
-
-    constructor(readable : Readable, original_text : string, args : Readable[]){
+    constructor(readable : Readable, text : string, args : Readable[]){
         this.readable = readable;
-        this.originalText = original_text;
-        if(translation != undefined && translation.has(original_text)){
-            this.text = translation.get(original_text)!;
-        }
-        else{
-            this.text = original_text;
-        }
+
+        this.text = text;
 
         this.args = args;
         this.children = args.map(x => x.reading());
@@ -292,14 +316,95 @@ export class Reading {
 
 }
 
+async function getTranslationMap(lang_code : string) : Promise<Map<number, string>> {
+    const url = `${homeURL}/lib/i18n/translation/${lang_code}.txt`;
+    let texts = await fetchText(url);
+
+    // for chinese text.
+    texts = texts.replaceAll("：", ":");
+
+    const map = new Map<number, string>();
+    for(const line of texts.split("\n")){
+        const k3 = line.indexOf(":");
+        assert(k3 != -1);
+        const id = parseInt( line.substring(0, k3) );
+        const text = line.substring(k3 + 1);
+        msg(`${id}>${text}`);
+        map.set(id, text);
+    }
+
+    return map;
+}
+
 export async function initI18n(){
     initLetters();
 
-    const texts = await getAllTexts();
-    msg(`all texts:`);
-    msg(texts.join("\n"));
-    msg("");
+    for(const [name, code, quotes] of languages){
+        quotationMarks.set(code, quotes);
+    }
+
+    let href = document.location.href;
+
+    const k1 = href.lastIndexOf("/");
+    homeURL = href.substring(0, k1);
+    msg(`home:${homeURL}`);
+
+
+
+    const k2 = href.indexOf("?lang=");
+    if(k2 != -1){
+        const lang_code = href.substring(k2+6).trim();
+        if(quotationMarks.has(lang_code)){
+            languageCode = lang_code;
+            msg(`lang code:${lang_code}`);
+
+            const map1 = await getTranslationMap("eng");
+            const map2 = await getTranslationMap(lang_code);
+
+            for(const [id, text2] of map2.entries()){
+                const text1 = map1.get(id);
+                if(text1 != undefined){
+                    translationMap.set(text1.trim(), text2.trim());
+                }
+            }
+        }
+        else{
+            msg(`illegal lang code:${lang_code}`);
+        }
+    }
+
 }
 
+export function initLanguageBar(span : HTMLElement){
+    let url = document.location.href;
+    const k = url.indexOf("?lang=");
+    if(k != -1){
+        url = url.substring(0, k);
+    }
+    msg(`url: ${document.location.href} ${url}`);
+
+    for(const [name, code, quotes] of languages){
+        const anchor = document.createElement("a");
+        anchor.style.marginLeft = "5px";
+        anchor.style.marginRight = "5px";
+
+        anchor.innerText = name;
+        anchor.href = `${url}?lang=${code}`;
+        span.append(anchor);
+    }
+}
+
+export async function bodyOnLoad(){
+    await initI18n();
+
+    const texts = await getAllTexts();
+    const text = Array.from(texts.entries()).map(x=>(x[0] + ":" + x[1])).join("\n");
+    msg(`all texts:`);
+    msg(text);
+    msg("");
+
+    $inp("all-texts").value = text;
+
+}
 
 }
