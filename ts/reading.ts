@@ -353,7 +353,7 @@ export async function initI18n(){
 
     const k2 = href.indexOf("?lang=");
     if(k2 != -1){
-        const lang_code = href.substring(k2+6).trim();
+        const lang_code = href.substring(k2+6, k2+6+3).trim();
         if(quotationMarks.has(lang_code)){
             languageCode = lang_code;
             msg(`lang code:${lang_code}`);
