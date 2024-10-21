@@ -104,10 +104,10 @@ function initLetters(){
     upperGreekLetters = range(24).filter(i => i != 17).map(i => String.fromCharCode(Alpha + i)).join("");
     lowerGreekLetters = range(24).filter(i => i != 17).map(i => String.fromCharCode(alpha + i)).join("");
 
-    msg(upperLatinLetters);
-    msg(lowerLatinLetters);
-    msg(upperGreekLetters);
-    msg(lowerGreekLetters);
+    // msg(upperLatinLetters);
+    // msg(lowerLatinLetters);
+    // msg(upperGreekLetters);
+    // msg(lowerGreekLetters);
 }
 
 export async function getAllTexts() {
@@ -161,9 +161,9 @@ export function T(text : string) : string {
     text = text.trim();
     const target = translationMap.get(text);
     if(target == undefined){
-        msg(`src:[${text.trim()}]`);
+        // msg(`src:[${text.trim()}]`);
         for(const t of translationMap.keys()){
-            msg(`src:[${t.trim()}]`);
+            // msg(`src:[${t.trim()}]`);
         }
     }
     return target != undefined ? target.trim() : text;
@@ -329,7 +329,7 @@ async function getTranslationMap(lang_code : string) : Promise<Map<number, strin
         assert(k3 != -1);
         const id = parseInt( line.substring(0, k3) );
         const text = line.substring(k3 + 1);
-        msg(`${id}>${text}`);
+        // msg(`${id}>${text}`);
         map.set(id, text);
     }
 
