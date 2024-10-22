@@ -197,6 +197,14 @@ export function token(text : string) : string {
     return start_mark + text + end_mark;
 }
 
+export abstract class  AbstractSpeech {    
+    static one : AbstractSpeech;
+
+    callback : ((idx:number)=>void) | undefined;
+    abstract speak(text : string) : void;
+    abstract waitEnd() : Promise<void>;
+}
+
 export interface Readable {
     reading() : Reading;
     highlight(on : boolean) : void;
