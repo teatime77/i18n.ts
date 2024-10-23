@@ -132,10 +132,10 @@ export async function getAllTexts() {
         for(const quote of [ "'", '"' ]){
             let start = 0;
 
-            const T = `T(${quote}`;
+            const TT_quote = `TT(${quote}`;
             while(true){
 
-                const k1 = text.indexOf(T, start);
+                const k1 = text.indexOf(TT_quote, start);
                 if(k1 == -1){
                     break;
                 }
@@ -157,7 +157,7 @@ export async function getAllTexts() {
     return texts;
 }
 
-export function T(text : string) : string {
+export function TT(text : string) : string {
     text = text.trim();
     const target = translationMap.get(text);
     if(target == undefined){
