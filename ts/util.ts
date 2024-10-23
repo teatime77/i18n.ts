@@ -83,5 +83,22 @@ export async function fetchText(fileURL: string) {
     return text;
 }
 
+export function parseURL(): [string, string, Map<string, string>] {
+    const url = document.location.href;
+    const parser = new URL(url);
+    console.log(`href:${url} origin:${parser.origin} pathname:${parser.pathname} search:${parser.search}`)
+    assert(parser.origin + parser.pathname + parser.search == url);
+
+    const queryString = parser.search.substring(1);
+    const queries = queryString.split("&");
+
+    const params = new Map<string, string>();
+    queries.forEach(query => {
+        const [key, value] = query.split("=");
+        params.set(decodeURIComponent(key), decodeURIComponent(value));
+    });
+    
+    return [ parser.origin, parser.pathname, params];
+}
 
 }

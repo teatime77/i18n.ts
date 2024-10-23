@@ -1,6 +1,7 @@
 namespace i18n_ts {
 
-let homeURL : string;
+let urlOrigin : string;
+let urlParams : Map<string, string>;
 
 export let languageCode : string = "eng";
 
@@ -111,9 +112,7 @@ function initLetters(){
 }
 
 export async function getAllTexts() {
-    const k = document.location.href.lastIndexOf("/");
-    const home_url = document.location.href.substring(0, k);
-    msg(`home:${home_url}`);
+    const [ origin, , ] = i18n_ts.parseURL();
 
     const names = [
         "parser",
@@ -125,7 +124,7 @@ export async function getAllTexts() {
     const texts : string[] = [];
 
     for(const name of names){
-        const url = `${home_url}/lib/${name}/${name}.js`;
+        const url = `${origin}/lib/${name}/${name}.js`;
         msg(`js url:${url}`);
         const text = await fetchText(url);
 
@@ -325,7 +324,7 @@ export class Reading {
 }
 
 async function getTranslationMap(lang_code : string) : Promise<Map<number, string>> {
-    const url = `${homeURL}/lib/i18n/translation/${lang_code}.txt`;
+    const url = `${urlOrigin}/lib/i18n/translation/${lang_code}.txt`;
     let texts = await fetchText(url);
 
     // for chinese text.
@@ -351,45 +350,43 @@ export async function initI18n(){
         quotationMarks.set(code, quotes);
     }
 
-    let href = document.location.href;
+    [ urlOrigin, , urlParams] = i18n_ts.parseURL();
 
-    const k1 = href.lastIndexOf("/");
-    homeURL = href.substring(0, k1);
-    msg(`home:${homeURL}`);
+    const lang_code = urlParams.get("lang");
+    if(lang_code == undefined){
+        return;
+    }
 
+    if(quotationMarks.has(lang_code)){
+        languageCode = lang_code;
+        msg(`lang code:${lang_code}`);
 
+        const map1 = await getTranslationMap("eng");
+        const map2 = await getTranslationMap(lang_code);
 
-    const k2 = href.indexOf("?lang=");
-    if(k2 != -1){
-        const lang_code = href.substring(k2+6, k2+6+3).trim();
-        if(quotationMarks.has(lang_code)){
-            languageCode = lang_code;
-            msg(`lang code:${lang_code}`);
-
-            const map1 = await getTranslationMap("eng");
-            const map2 = await getTranslationMap(lang_code);
-
-            for(const [id, text2] of map2.entries()){
-                const text1 = map1.get(id);
-                if(text1 != undefined){
-                    translationMap.set(text1.trim(), text2.trim());
-                }
+        for(const [id, text2] of map2.entries()){
+            const text1 = map1.get(id);
+            if(text1 != undefined){
+                translationMap.set(text1.trim(), text2.trim());
             }
         }
-        else{
-            msg(`illegal lang code:${lang_code}`);
-        }
+    }
+    else{
+        msg(`illegal lang code:${lang_code}`);
     }
 
 }
 
 export function initLanguageBar(span : HTMLElement){
-    let url = document.location.href;
-    const k = url.indexOf("?lang=");
-    if(k != -1){
-        url = url.substring(0, k);
+    const [ origin, pathname, params] = i18n_ts.parseURL();
+
+    let mode_ver = "";
+    for(const key of [ "mode", "ver" ]){
+        const value = params.get(key);
+        if(value != undefined){
+            mode_ver += `&${key}=${value}`;
+        }
     }
-    msg(`url: ${document.location.href} ${url}`);
 
     for(const [name, code, quotes] of languages){
         const anchor = document.createElement("a");
@@ -397,7 +394,7 @@ export function initLanguageBar(span : HTMLElement){
         anchor.style.marginRight = "5px";
 
         anchor.innerText = name;
-        anchor.href = `${url}?lang=${code}`;
+        anchor.href = `${origin}${pathname}?lang=${code}${mode_ver}`;
         span.append(anchor);
     }
 }
