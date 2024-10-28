@@ -199,6 +199,9 @@ export function token(text : string) : string {
 export abstract class  AbstractSpeech {    
     static one : AbstractSpeech;
 
+    prevCharIndex = 0;
+    speaking : boolean = false;
+
     callback : ((idx:number)=>void) | undefined;
     abstract speak(text : string) : void;
     abstract waitEnd() : Promise<void>;
