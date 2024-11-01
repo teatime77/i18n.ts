@@ -28,7 +28,7 @@ export function $sel(id : string) : HTMLSelectElement {
         
 export class MyError extends Error {
     constructor(text : string = ""){
-        super();
+        super(text);
     }
 }
 
