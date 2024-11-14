@@ -205,6 +205,7 @@ export abstract class  AbstractSpeech {
     callback : ((idx:number)=>void) | undefined;
     abstract speak(text : string) : void;
     abstract waitEnd() : Promise<void>;
+    abstract speak_waitEnd(text : string) : Promise<void>;
 }
 
 export interface Readable {
