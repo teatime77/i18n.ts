@@ -168,6 +168,10 @@ export function TT(text : string) : string {
     return target != undefined ? target.trim() : text;
 }
 
+export function TTs(text : string) : string[] {
+    return TT(text).split("\n");
+}
+
 
 function getQuotationMarks() : [string, string]{
     const marks = quotationMarks.get(languageCode);
