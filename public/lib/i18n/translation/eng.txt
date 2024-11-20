@@ -1,32 +1,201 @@
-0:Draw a line from point "A" to point "B".
-1:Draw a line through point "A" that is parallel to line "B".
-2:Draw a circle with point "A" as the center.
-3:Draw a triangle with vertices "A", "B", and "C".
-4:Draw a quadrilateral with vertices "A", "B", "C" and "D".
-5:Let "A" be the midpoint between points "B" and "C".
-6:Let "A" be the foot of the perpendicular line drawn from point "B" to the line "C".
-7:Let "A" be the intersection point of the two lines.
-8:Let points "A" and "B" be the intersections of the line and the circle.
-9:Let points "A" and "B" be the intersections of the two circles.
-10:Draw tangents to the two circles.
-11:Draw a tangent line from point "A" to the circle, and let the points of tangency be points "B" and "C".
-12:selection
-13:point
-14:mid point
-15:intersection
-16:line segment
-17:half line
-18:line
-19:polygon
-20:perpendicular
-21:parallel line
-22:circle by point
-23:circle by radius
-24:arc
-25:ellipse
-26:angle
-27:dimension line
-28:length symbol
-29:tangent circles
-30:tangent point
-31:text
+0:selection
+
+1:range
+
+2:point
+
+3:mid point
+
+4:intersection
+
+5:line segment
+
+6:polygon
+
+7:perpendicular
+
+8:parallel line
+
+9:circle by point
+
+10:circle by radius
+
+11:arc by point
+
+12:arc by radius
+
+13:ellipse
+
+14:tangent point
+
+15:tangent circles
+
+16:angle
+
+17:dimension line
+
+18:length symbol
+
+19:text
+
+20:statement
+
+21:triangle congruence
+
+22:animation
+
+23:Suppose two lines intersect.
+
+24:There are four angles around the intersection.
+
+25:These two angles are called vertical angles.
+
+26:These two angles are also called vertical angles.
+
+27:The vertical angles are equal to each other.
+
+28:We prove this.
+
+29:Let this angle be gamma.
+
+30:therefore
+
+31:This completes the proof that the vertical angles are equal.
+
+32:The sum of the interior angles of a triangle is 180 degrees.
+
+33:We will prove this.
+
+34:Draw a line parallel to one side of the triangle and through the vertex.
+
+35:As these two lines are parallel
+
+36:These two alternate angles are equal.
+
+37:Similarly, as these two lines are parallel
+
+38:The sum of these three angles is 180 degrees.
+
+39:Therefore, the sum of these angles in a triangle is 180 degrees.
+
+40:This completes the proof.
+
+41:We will draw the angle bisector.
+
+42:Draw an arc.
+
+43:Find the intersection of the arc and the line.
+
+44:Draw an arc with the same radius.
+
+45:Find the intersection of two arcs.
+
+46:Draw a half-line.
+
+47:We prove that this line is an angle bisector.
+
+48:These are the radii of the same arc, so they have the same length.
+
+49:Since the radii of these two arcs are the same,
+
+50:The two lines have the same length.
+
+51:The two triangles are congruent because they have equal sides.
+
+52:Since the two triangles are congruent, corresponding angles are equal.
+
+53:This completes the proof that this line is an angle bisector.
+
+54:We draw a perpendicular line from a point on a line
+
+55:Draw an arc centered on this point.
+
+56:Draw an arc centered on the intersection.
+
+57:Draw an arc of the same radius centered at another intersection.
+
+58:Draw a line from the intersection of the arcs to a point on the line.
+
+59:This angle is a right angle.
+
+60:These two lines are perpendicular to each other.
+
+61:This concludes the drawing.
+
+62:We will draw the perpendicular bisector.
+
+63:Draw a circle centered on this point.
+
+64:Draw a circle of the same radius with the center at another point.
+
+65:Find the intersection of two circles.
+
+66:Draw a line connecting the two intersections.
+
+67:There is one intersection between the two lines.
+
+68:Therefore this line is a perpendicular bisector.
+
+69:We draw parallel lines.
+
+70:Draw a perpendicular line to the line.
+
+71:Draw a perpendicular line to this perpendicular line.
+
+72:These two lines are said to be parallel.
+
+73:Suppose there are two parallel lines.
+
+74:Drop a perpendicular line from one parallel line to the other.
+
+75:Drop a perpendicular line from a different position.
+
+76:The lengths of these perpendicular lines are always equal.
+
+77:This is called the parallel lines axiom.
+
+78:Suppose there two parallel lines and one line that intersects them.
+
+79:These two angles are called alternate angles.
+
+80:These two angles are also alternate angles.
+
+81:The alternate angles of parallel lines are equal to each other.
+
+82:Draw a perpendicular line from the intersection to another parallel line.
+
+83:Draw another perpendicular line from the intersection to the line.
+
+84:This angle is also a right angle.
+
+85:Since these lines are parallel.
+
+86:The lengths of these segments are equal.
+
+87:Similarly, since these lines are parallel.
+
+88:The two triangles are congruent because the lengths of the corresponding sides are equal and the angles between the two sides are right angles.
+
+89:We prove that the two lines are perpendicular to each other.
+
+90:These are the radii of the same arc.
+
+91:So they have the same length.
+
+92:We show that the two triangles are congruent.
+
+93:These two sides are equal.
+
+94:This side is common.
+
+95:Because the three corresponding sides are equal,
+
+96:the two triangles are congruent.
+
+97:These corresponding angles are equal.
+
+98:The sum of the two angles is 180 degrees.
+
+99:So each angle is a right angle.
+
+100:Therefore, the two lines are perpendicular to each other.

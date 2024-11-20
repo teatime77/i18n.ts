@@ -24,7 +24,12 @@ const languages : ([string, string, [string,string]])[] = [
     [ "한국어", "kor", ['"', '"']],
     [ "Русский", "rus", ['«', '»']],
     [ "español", "spa", ['"', '"']],
-]
+    [ "português", "por", ['"', '"']],
+];
+
+const engTexts : string[] = [];
+
+const engMap : Map<string, number> = new Map<string, number>();
 
 /**
 Quotation mark
@@ -158,6 +163,24 @@ export async function getAllTexts() {
 
 export function TT(text : string) : string {
     text = text.trim();
+
+    for(let line of text.split("\n")){
+        line = line.trim();
+        if(line != ""){
+
+            let id = engMap.get(line);
+            if(id == undefined){
+                id = engTexts.length;
+                engTexts.push(line);
+                engMap.set(line, id);
+            }
+        }
+    }
+
+    if(languageCode == "eng"){
+        return text;
+    }
+
     const target = translationMap.get(text);
     if(target == undefined){
         // msg(`src:[${text.trim()}]`);
@@ -168,8 +191,13 @@ export function TT(text : string) : string {
     return target != undefined ? target.trim() : text;
 }
 
+export function getEngTexts() : string[] {
+    return engTexts;
+}
+
 export function TTs(text : string) : string[] {
-    return TT(text).split("\n");
+    const lines = text.split("\n").map(x => x.trim()).filter(x => x != "");
+    return lines.map(x => TT(x));
 }
 
 
@@ -332,14 +360,18 @@ export class Reading {
 }
 
 async function getTranslationMap(lang_code : string) : Promise<Map<number, string>> {
-    const url = `${urlOrigin}/lib/i18n/translation/${lang_code}.txt`;
+    const url = `${urlOrigin}/lib/i18n/translation/${lang_code}.txt?ver=${Date.now()}`;
     let texts = await fetchText(url);
 
     // for chinese text.
     texts = texts.replaceAll("：", ":");
 
     const map = new Map<number, string>();
-    for(const line of texts.split("\n")){
+    for(let line of texts.split("\n")){
+        line = line.trim();
+        if(line == ""){
+            continue;
+        }
         const k3 = line.indexOf(":");
         assert(k3 != -1);
         const id = parseInt( line.substring(0, k3) );
@@ -368,6 +400,10 @@ export async function initI18n(){
     if(quotationMarks.has(lang_code)){
         languageCode = lang_code;
         msg(`lang code:${lang_code}`);
+
+        if(languageCode == "eng"){
+            return;
+        }
 
         const map1 = await getTranslationMap("eng");
         const map2 = await getTranslationMap(lang_code);
