@@ -3,6 +3,8 @@ namespace i18n_ts {
 let urlOrigin : string;
 let urlParams : Map<string, string>;
 
+export const fgColor = "white";
+
 export let languageCode : string = "eng";
 
 export let  upperLatinLetters : string;
@@ -436,6 +438,7 @@ export function initLanguageBar(span : HTMLElement){
         const anchor = document.createElement("a");
         anchor.style.marginLeft = "5px";
         anchor.style.marginRight = "5px";
+        anchor.style.color = fgColor;
 
         anchor.innerText = name;
         anchor.href = `${origin}${pathname}?lang=${code}${mode_ver}`;
