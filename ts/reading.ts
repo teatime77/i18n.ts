@@ -14,6 +14,8 @@ export let  latinLetters : string;
 export let  upperGreekLetters : string;
 export let  lowerGreekLetters : string;
 
+let TextToId : Map<string, number>;
+
 const languages : ([string, string, [string,string]])[] = [
     [ "اَلْعَرَبِيَّةُ", "ara", ['"', '"']],
     [ "汉语", "chi", ['“', '”']],
@@ -202,6 +204,10 @@ export function TTs(text : string) : string[] {
     return lines.map(x => TT(x));
 }
 
+export function getIdFromText(text : string) : number | undefined {
+    return TextToId.get(text);
+}
+
 
 function getQuotationMarks() : [string, string]{
     const marks = quotationMarks.get(languageCode);
@@ -361,14 +367,16 @@ export class Reading {
 
 }
 
-async function getTranslationMap(lang_code : string) : Promise<Map<number, string>> {
+async function getTranslationMap(lang_code : string) : Promise<[Map<number, string>, Map<string, number>]> {
     const url = `${urlOrigin}/lib/i18n/translation/${lang_code}.txt?ver=${Date.now()}`;
     let texts = await fetchText(url);
 
     // for chinese text.
     texts = texts.replaceAll("：", ":");
 
-    const map = new Map<number, string>();
+    const id_to_text = new Map<number, string>();
+    const text_to_id = new Map<string, number>();
+
     for(let line of texts.split("\n")){
         line = line.trim();
         if(line == ""){
@@ -379,10 +387,11 @@ async function getTranslationMap(lang_code : string) : Promise<Map<number, strin
         const id = parseInt( line.substring(0, k3) );
         const text = line.substring(k3 + 1);
         // msg(`${id}>${text}`);
-        map.set(id, text);
+        id_to_text.set(id, text);
+        text_to_id.set(text, id);
     }
 
-    return map;
+    return [id_to_text, text_to_id];
 }
 
 export async function initI18n(){
@@ -403,15 +412,18 @@ export async function initI18n(){
         languageCode = lang_code;
         msg(`lang code:${lang_code}`);
 
+        const [id_to_text1, text_to_id1] = await getTranslationMap("eng");
+
         if(languageCode == "eng"){
+            TextToId = text_to_id1;
             return;
         }
 
-        const map1 = await getTranslationMap("eng");
-        const map2 = await getTranslationMap(lang_code);
+        const [id_to_text2, text_to_id2] = await getTranslationMap(lang_code);
+        TextToId = text_to_id2;
 
-        for(const [id, text2] of map2.entries()){
-            const text1 = map1.get(id);
+        for(const [id, text2] of id_to_text2.entries()){
+            const text1 = id_to_text1.get(id);
             if(text1 != undefined){
                 translationMap.set(text1.trim(), text2.trim());
             }
@@ -423,14 +435,20 @@ export async function initI18n(){
 
 }
 
-export function initLanguageBar(span : HTMLElement){
+export function initLanguageBar(span : HTMLElement, doc_id? : number){
+    span.innerHTML = "";
+
     const [ origin, pathname, params] = i18n_ts.parseURL();
 
-    let mode_ver = "";
-    for(const key of [ "mode", "ver" ]){
+    if(doc_id != undefined){
+        params.set("id", `${doc_id}`);
+    }
+
+    let mode_ver_id = "";
+    for(const key of [ "mode", "ver", "id" ]){
         const value = params.get(key);
         if(value != undefined){
-            mode_ver += `&${key}=${value}`;
+            mode_ver_id += `&${key}=${value}`;
         }
     }
 
@@ -441,7 +459,7 @@ export function initLanguageBar(span : HTMLElement){
         anchor.style.color = fgColor;
 
         anchor.innerText = name;
-        anchor.href = `${origin}${pathname}?lang=${code}${mode_ver}`;
+        anchor.href = `${origin}${pathname}?lang=${code}${mode_ver_id}`;
         span.append(anchor);
     }
 }

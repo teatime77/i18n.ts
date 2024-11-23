@@ -58,7 +58,7 @@
 
 29:Let this angle be gamma.
 
-30:therefore
+30:therefore,
 
 31:This completes the proof that the vertical angles are equal.
 
@@ -68,7 +68,7 @@
 
 34:Draw a line parallel to one side of the triangle and through the vertex.
 
-35:As these two lines are parallel
+35:As these two lines are parallel,
 
 36:These two alternate angles are equal.
 
@@ -106,7 +106,7 @@
 
 53:This completes the proof that this line is an angle bisector.
 
-54:We draw a perpendicular line from a point on a line
+54:We draw a perpendicular line from a point on a line.
 
 55:Draw an arc centered on this point.
 
