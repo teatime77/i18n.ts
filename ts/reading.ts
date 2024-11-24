@@ -5,7 +5,7 @@ let urlParams : Map<string, string>;
 
 export const fgColor = "white";
 
-export let languageCode : string = "eng";
+export let textLanguageCode : string = "eng";
 
 export let  upperLatinLetters : string;
 export let  lowerLatinLetters : string;
@@ -98,6 +98,15 @@ Internet users by language
 
 let translationMap : Map<string, string> = new Map<string, string>();
 
+export function setTextLanguageCode(code3 : string){
+    const code3s = languages.map(x => x[1]);
+    if(code3.includes(code3)){
+        textLanguageCode = code3;
+    }
+    else{
+        throw new MyError();
+    }
+}
 
 function initLetters(){
     const A = "A".charCodeAt(0);
@@ -181,7 +190,7 @@ export function TT(text : string) : string {
         }
     }
 
-    if(languageCode == "eng"){
+    if(textLanguageCode == "eng"){
         return text;
     }
 
@@ -210,7 +219,7 @@ export function getIdFromText(text : string) : number | undefined {
 
 
 function getQuotationMarks() : [string, string]{
-    const marks = quotationMarks.get(languageCode);
+    const marks = quotationMarks.get(textLanguageCode);
     if(marks == undefined){
         return ['"', '"'];
     }
@@ -220,7 +229,7 @@ function getQuotationMarks() : [string, string]{
 }
 
 export function token(text : string) : string {
-    if(languageCode == "ara"){
+    if(textLanguageCode == "ara"){
         switch("ABCDE".indexOf(text)){
         case 0: return "أ";
         case 1: return "ب";
@@ -394,6 +403,25 @@ async function getTranslationMap(lang_code : string) : Promise<[Map<number, stri
     return [id_to_text, text_to_id];
 }
 
+export async function loadTranslationMap() {
+    const [id_to_text1, text_to_id1] = await getTranslationMap("eng");
+
+    if(textLanguageCode == "eng"){
+        TextToId = text_to_id1;
+        return;
+    }
+
+    const [id_to_text2, text_to_id2] = await getTranslationMap(textLanguageCode);
+    TextToId = text_to_id2;
+
+    for(const [id, text2] of id_to_text2.entries()){
+        const text1 = id_to_text1.get(id);
+        if(text1 != undefined){
+            translationMap.set(text1.trim(), text2.trim());
+        }
+    }    
+}
+
 export async function initI18n(){
     initLetters();
 
@@ -403,64 +431,12 @@ export async function initI18n(){
 
     [ urlOrigin, , urlParams] = i18n_ts.parseURL();
 
-    const lang_code = urlParams.get("lang");
-    if(lang_code == undefined){
-        return;
-    }
-
-    if(quotationMarks.has(lang_code)){
-        languageCode = lang_code;
-        msg(`lang code:${lang_code}`);
-
-        const [id_to_text1, text_to_id1] = await getTranslationMap("eng");
-
-        if(languageCode == "eng"){
-            TextToId = text_to_id1;
-            return;
-        }
-
-        const [id_to_text2, text_to_id2] = await getTranslationMap(lang_code);
-        TextToId = text_to_id2;
-
-        for(const [id, text2] of id_to_text2.entries()){
-            const text1 = id_to_text1.get(id);
-            if(text1 != undefined){
-                translationMap.set(text1.trim(), text2.trim());
-            }
-        }
+    if(quotationMarks.has(textLanguageCode)){
+        msg(`lang code:${textLanguageCode}`);
+        await loadTranslationMap();
     }
     else{
-        msg(`illegal lang code:${lang_code}`);
-    }
-
-}
-
-export function initLanguageBar(span : HTMLElement, doc_id? : number){
-    span.innerHTML = "";
-
-    const [ origin, pathname, params] = i18n_ts.parseURL();
-
-    if(doc_id != undefined){
-        params.set("id", `${doc_id}`);
-    }
-
-    let mode_ver_id = "";
-    for(const key of [ "mode", "ver", "id" ]){
-        const value = params.get(key);
-        if(value != undefined){
-            mode_ver_id += `&${key}=${value}`;
-        }
-    }
-
-    for(const [name, code, quotes] of languages){
-        const anchor = document.createElement("a");
-        anchor.style.marginLeft = "5px";
-        anchor.style.marginRight = "5px";
-        anchor.style.color = fgColor;
-
-        anchor.innerText = name;
-        anchor.href = `${origin}${pathname}?lang=${code}${mode_ver_id}`;
-        span.append(anchor);
+        msg(`illegal lang code:${textLanguageCode}`);
     }
 }
 
