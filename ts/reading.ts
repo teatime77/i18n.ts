@@ -3,8 +3,6 @@ namespace i18n_ts {
 let urlOrigin : string;
 let urlParams : Map<string, string>;
 
-export const fgColor = "white";
-
 export let textLanguageCode : string = "eng";
 
 export let  upperLatinLetters : string;
