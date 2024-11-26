@@ -199,3 +199,29 @@
 99:Entonces cada ángulo es un ángulo recto.
 
 100:Por lo tanto, las dos líneas son perpendiculares entre sí.
+
+101: Derivación
+
+102: Definición de ángulos verticales
+
+103: Los ángulos verticales son iguales
+
+104: Suma de los ángulos interiores de un triángulo
+
+105: Bisectriz de un ángulo (construcción)
+
+106: Bisectriz de un ángulo (prueba)
+
+107: Línea perpendicular (construcción)
+
+108: Bisectriz perpendicular (construcción)
+
+109: Líneas paralelas (construcción)
+
+110: Axioma de la línea paralela
+
+111: Ángulo alternativo (definición)
+
+112: Ángulo alternativo (prueba)
+
+113: Línea perpendicular (prueba)

@@ -199,3 +199,29 @@
 99:Então cada ângulo é um ângulo reto.
 
 100:Portanto, as duas linhas são perpendiculares entre si.
+
+101:Diferenciação
+
+102:Definição de ângulos verticais
+
+103:Os ângulos verticais são iguais
+
+104: Soma dos ângulos internos de um triângulo
+
+105: Mediatriz do ângulo (construção)
+
+106: Mediatriz do ângulo (prova)
+
+107:Linha perpendicular (construção)
+
+108: Mediatriz perpendicular (construção)
+
+109: Linhas paralelas (construção)
+
+110: Axioma da linha paralela
+
+111:Ângulo alternativo (definição)
+
+112: Ângulo alternativo (prova)
+
+113:Linha perpendicular (prova)

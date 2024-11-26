@@ -199,3 +199,29 @@
 99:Jeder Winkel ist also ein rechter Winkel.
 
 100:Daher stehen die beiden Linien senkrecht zueinander.
+
+101:Differenzierung
+
+102:Definition von Scheitelwinkeln
+
+103:Scheitelwinkel sind gleich
+
+104:Summe der Innenwinkel eines Dreiecks
+
+105:Winkelhalbierende (Konstruktion)
+
+106:Winkelhalbierende (Beweis)
+
+107:Senkrechte Linie (Konstruktion)
+
+108:Senkrechte Halbierende (Konstruktion)
+
+109:Parallele Linien (Konstruktion)
+
+110:Parallele Linienaxiom
+
+111:Alternativwinkel (Definition)
+
+112:Alternativwinkel (Beweis)
+
+113:Senkrechte Linie (Beweis)

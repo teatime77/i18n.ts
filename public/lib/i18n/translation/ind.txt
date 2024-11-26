@@ -199,3 +199,29 @@
 99: Jadi, setiap sudut adalah sudut siku-siku.
 
 100:Oleh karena itu, kedua garis tersebut saling tegak lurus.
+
+101:Diferensiasi
+
+102:Pengertian sudut vertikal
+
+103:Sudut-sudut vertikal sama besar
+
+104:Jumlah sudut-sudut dalam segitiga
+
+105:Pembagi sudut (konstruksi)
+
+106:Pembagi sudut (bukti)
+
+107:Garis tegak lurus (konstruksi)
+
+108:Pembagi sudut (konstruksi)
+
+109:Garis-garis sejajar (konstruksi)
+
+110:Aksioma garis sejajar
+
+111:Sudut berseberangan (pengertian)
+
+112:Sudut berseberangan (bukti)
+
+113:Garis tegak lurus (bukti)

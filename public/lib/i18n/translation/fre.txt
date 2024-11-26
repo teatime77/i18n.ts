@@ -199,3 +199,29 @@
 99 :Chaque angle est donc un angle droit.
 
 100 :Par conséquent, les deux droites sont perpendiculaires l'une à l'autre.
+
+101 : Différenciation
+
+102 : Définition des angles verticaux
+
+103 : Les angles verticaux sont égaux
+
+104 : Somme des angles intérieurs d'un triangle
+
+105 : Bissectrice d'angle (construction)
+
+106 : Bissectrice d'angle (preuve)
+
+107 : Ligne perpendiculaire (construction)
+
+108 : Bissectrice perpendiculaire (construction)
+
+109 : Lignes parallèles (construction)
+
+110 : Axiome de la ligne parallèle
+
+111 : Angle alternatif (définition)
+
+112 : Angle alternatif (preuve)
+
+113 : Ligne perpendiculaire (preuve)

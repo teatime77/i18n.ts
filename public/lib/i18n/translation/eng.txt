@@ -199,3 +199,29 @@
 99:So each angle is a right angle.
 
 100:Therefore, the two lines are perpendicular to each other.
+
+101:Differentiation
+
+102:Definition of vertical angles
+
+103:Vertical angles are equal
+
+104:Sum of interior angles of a triangle
+
+105:Angle bisector (construction)
+
+106:Angle bisector (proof)
+
+107:Perpendicular line (construction)
+
+108:Perpendicular bisector (construction)
+
+109:Parallel lines (construction)
+
+110:Parallel line axiom
+
+111:Alternative angle (definition)
+
+112:Alternative angle (proof)
+
+113:Perpendicular line (proof)
