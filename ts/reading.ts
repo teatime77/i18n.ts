@@ -3,6 +3,14 @@ namespace i18n_ts {
 let urlOrigin : string;
 let urlParams : Map<string, string>;
 
+export let appMode : AppMode;
+
+export enum AppMode {
+    edit,
+    lesson,
+    play
+}
+
 export let textLanguageCode : string = "eng";
 
 export let  upperLatinLetters : string;
@@ -429,6 +437,18 @@ export async function initI18n(){
 
     [ urlOrigin, , urlParams] = i18n_ts.parseURL();
 
+    switch(urlParams.get("mode")){
+    case "edit":
+        appMode = AppMode.edit;
+        break;
+    case "lesson":
+        appMode = AppMode.lesson;
+        break;
+    default:
+        appMode = AppMode.play;
+        break;
+    }
+    
     if(quotationMarks.has(textLanguageCode)){
         msg(`lang code:${textLanguageCode}`);
         await loadTranslationMap();
