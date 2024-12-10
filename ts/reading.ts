@@ -7,8 +7,9 @@ export let appMode : AppMode;
 
 export enum AppMode {
     edit,
-    lesson,
-    play
+    play,
+    lessonEdit,
+    lessonPlay,
 }
 
 export let textLanguageCode : string = "eng";
@@ -437,16 +438,23 @@ export async function initI18n(){
 
     [ urlOrigin, , urlParams] = i18n_ts.parseURL();
 
-    switch(urlParams.get("mode")){
-    case "edit":
-        appMode = AppMode.edit;
-        break;
-    case "lesson":
-        appMode = AppMode.lesson;
-        break;
-    default:
-        appMode = AppMode.play;
-        break;
+    if(urlParams.get("lesson") != undefined){
+
+        appMode = AppMode.lessonPlay;
+    }
+    else{
+
+        switch(urlParams.get("mode")){
+        case "edit":
+            appMode = AppMode.edit;
+            break;
+        case "lesson":
+            appMode = AppMode.lessonEdit;
+            break;
+        default:
+            appMode = AppMode.play;
+            break;
+        }
     }
     
     if(quotationMarks.has(textLanguageCode)){
