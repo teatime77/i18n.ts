@@ -473,7 +473,6 @@ export async function bodyOnLoad(){
     const text = Array.from(texts.entries()).map(x=>(x[0] + ":" + x[1])).join("\n");
     msg(`all texts:`);
     msg(text);
-    msg("");
 
     $inp("all-texts").value = text;
 
