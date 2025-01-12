@@ -225,3 +225,53 @@
 112:Alternative angle (proof)
 
 113:Perpendicular line (proof)
+
+114:Vertical angles are equal.
+
+115:The distance between two parallel lines is equal.
+
+116:Draw a perpendicular line from a point on a line.
+
+117:Draw a perpendicular line from a point to a line.
+
+118:The base angles of an isosceles triangle are equal.
+
+119:The opposite angles of a parallelogram are equal.
+
+120:The opposite sides of a parallelogram are equal in length.
+
+121:A quadrilateral with opposite sides of equal length is a parallelogram.
+
+122:The diagonals of a parallelogram intersect at the midpoint.
+
+123:If the diagonals of a quadrilateral intersect at the midpoint, it is a parallelogram.
+
+124:If a pair of opposite sides of a quadrilateral are parallel and of equal length, it is a parallelogram.
+
+125:The diagonals of a rhombus intersect at right angles.
+
+126:Draw a line segment through two points.
+
+127:Draw the angle formed by intersecting two lines.
+
+128:Draw a line through two points.
+
+129:Draw a line through a point that is parallel to another line.
+
+130:Draw a triangle.
+
+131:Draw a quadrilateral.
+
+132:vertical angle
+
+133:angle bisector
+
+134:alternate angles
+
+135:perpendicular line
+
+136:isosceles triangle
+
+137:parallelogram
+
+138:rhombus

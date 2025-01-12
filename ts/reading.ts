@@ -40,8 +40,6 @@ const languages : ([string, string, [string,string]])[] = [
 
 const engTexts : string[] = [];
 
-const engMap : Map<string, number> = new Map<string, number>();
-
 /**
 Quotation mark
     https://en.wikipedia.org/wiki/Quotation_mark
@@ -184,35 +182,24 @@ export async function getAllTexts() {
 export function TT(text : string) : string {
     text = text.trim();
 
-    for(let line of text.split("\n")){
-        line = line.trim();
-        if(line != ""){
-
-            let id = engMap.get(line);
-            if(id == undefined){
-                id = engTexts.length;
-                engTexts.push(line);
-                engMap.set(line, id);
-            }
-        }
-    }
-
     if(textLanguageCode == "eng"){
         return text;
     }
 
     const target = translationMap.get(text);
     if(target == undefined){
-        // msg(`src:[${text.trim()}]`);
-        for(const t of translationMap.keys()){
-            // msg(`src:[${t.trim()}]`);
+
+        if(!engTexts.includes(text)){
+            msg(`new text:[${text}]`);
+            engTexts.push(text);
         }
     }
     return target != undefined ? target.trim() : text;
 }
 
-export function getEngTexts() : string[] {
-    return engTexts;
+export function getEngTexts() : string {
+    const map_size = translationMap.size;
+    return Array.from(engTexts.entries()).map(x => `${map_size + x[0]}:${x[1]}`).join("\n\n");
 }
 
 export function TTs(text : string) : string[] {
