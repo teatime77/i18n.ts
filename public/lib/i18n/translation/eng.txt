@@ -236,9 +236,9 @@
 
 118:The base angles of an isosceles triangle are equal.
 
-119:The opposite angles of a parallelogram are equal.
+119:The opposite angles of a parallelogram are equal. The opposite sides of a parallelogram are equal in length.
 
-120:The opposite sides of a parallelogram are equal in length.
+120:unused text.
 
 121:A quadrilateral with opposite sides of equal length is a parallelogram.
 
@@ -275,3 +275,5 @@
 137:parallelogram
 
 138:rhombus
+
+139:A quadrilateral with opposite angles that are equal is a parallelogram.
