@@ -277,3 +277,11 @@
 138:rhombus
 
 139:A quadrilateral with opposite angles that are equal is a parallelogram.
+
+140:The bisector of the apex angle of an isosceles triangle bisects the base perpendicularly.
+
+141:midpoint theorem
+
+142:Find the midpoint of two points.
+
+143:Draw a half-line through two points.
