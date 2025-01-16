@@ -246,7 +246,7 @@ export abstract class  AbstractSpeech {
     speaking : boolean = false;
 
     callback : ((idx:number)=>void) | undefined;
-    abstract speak(text : string) : void;
+    abstract speak(text : string) : Promise<void>;
     abstract waitEnd() : Promise<void>;
     abstract speak_waitEnd(text : string) : Promise<void>;
 }
