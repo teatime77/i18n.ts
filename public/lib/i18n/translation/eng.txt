@@ -285,3 +285,69 @@
 142:Find the midpoint of two points.
 
 143:Draw a half-line through two points.
+
+144:blank
+
+145:Draw a line.
+
+146:Draw a point on the line.
+
+147:this is a parallelogram.
+
+148:these two lines are parallel.
+
+149:the two length symbols are of equal length.
+
+150:the two angles are equal.
+
+151:Draw a point.
+
+152:this is a rhombus.
+
+153:Since three pairs of sides of two triangles are equal,
+
+154:Since two pairs of sides of two triangles are equal, and the included angles are equal,
+
+155:Since two pairs of angles of two triangles are equal, and the included sides are equal,
+
+156:Since the two circles have the same radius,
+
+157:Since two length symbols are the radii of the same circle,
+
+158:Since the distance between two parallel lines is constant,
+
+159:Since the two circles have the same radius,
+
+160:Since the two triangles are congruent,
+
+161:Since the opposite sides of a parallelogram are equal in length,
+
+162:Since the diagonals of a parallelogram intersect at the midpoint,
+
+163:Since these two length symbols are equal to another length symbol,
+
+164:Since vertical angles are equal,
+
+165:Since the corresponding angles of parallel lines are equal,
+
+166:Since these angles are formed by the angle bisectors,
+
+167:Since the two triangles are congruent,
+
+168:Since the diagonals of a parallelogram are congruent,
+
+169:Since each opposite sides are equal,
+
+170:Since each opposite sides are parallel,
+
+171:Since each opposite angles are equal,
+
+172:Since one opposite sides are parallel and equal,
+
+173:Since the diagonals intersect at their midpoints,
+
+174:Since all four sides are equal in length,
+
+175:Since the opposite sides of a parallelogram are parallel,
+
+176:Make the two line segments equal in length.
