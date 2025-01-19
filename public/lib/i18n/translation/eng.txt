@@ -351,3 +351,9 @@
 175:Since the opposite sides of a parallelogram are parallel,
 
 176:Make the two line segments equal in length.
+
+177:A triangle with equal base angles is an isosceles triangle.
+
+178:Since both pairs of angles in two triangles are equal,
+
+179:Since the two triangles are similar,
