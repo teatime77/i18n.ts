@@ -357,3 +357,7 @@
 178:Since both pairs of angles in two triangles are equal,
 
 179:Since the two triangles are similar,
+
+180:the two triangles are similar.
+
+181:Draw the angle bisector.
