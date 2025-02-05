@@ -102,6 +102,7 @@ Internet users by language
 */
 
 let translationMap : Map<string, string> = new Map<string, string>();
+let maxTranslationId : number;
 
 export function setTextLanguageCode(code3 : string){
     const code3s = languages.map(x => x[1]);
@@ -198,8 +199,7 @@ export function TT(text : string) : string {
 }
 
 export function getEngTexts() : string {
-    const map_size = translationMap.size;
-    return Array.from(engTexts.entries()).map(x => `${map_size + x[0]}:${x[1]}`).join("\n\n");
+    return Array.from(engTexts.entries()).map(x => `${maxTranslationId + 1 + x[0]}:${x[1]}`).join("\n\n");
 }
 
 export function TTs(text : string) : string[] {
@@ -400,10 +400,19 @@ async function getTranslationMap(lang_code : string) : Promise<[Map<number, stri
         assert(k3 != -1);
         const id = parseInt( line.substring(0, k3) );
         const text = line.substring(k3 + 1);
-        // msg(`${id}>${text}`);
+        if(text == ""){
+            msg(`skip:${lang_code} ${id}`);
+            continue;
+        }
         id_to_text.set(id, text);
+
+        const id2 = text_to_id.get(text);
+        if(id2 != undefined){
+            msg(`dup:${lang_code} ${id2} ${id} ${text}`);
+        }
         text_to_id.set(text, id);
     }
+    msg(`get-Translation-Map:${lang_code} ${id_to_text.size} ${text_to_id.size}`);
 
     return [id_to_text, text_to_id];
 }
@@ -424,7 +433,13 @@ export async function loadTranslationMap() {
         if(text1 != undefined){
             translationMap.set(text1.trim(), text2.trim());
         }
+        else{
+            msg(`no translation:${id} ${text2}`);
+        }
     }    
+
+    maxTranslationId = Math.max(... Array.from(id_to_text1.keys()));
+    msg(`translation-Map size:${translationMap.size} max:${maxTranslationId}`);
 }
 
 export async function initI18n(){
