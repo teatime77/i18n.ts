@@ -38,6 +38,12 @@ export function assert(b : boolean, msg : string = ""){
     }
 }    
 
+export function check(b : boolean, msg : string = ""){
+    if(!b){
+        throw new MyError(msg);
+    }
+}    
+
 export function msg(txt : string){
     console.log(txt);
 }
@@ -62,10 +68,16 @@ export function unique<T>(v : Array<T>) : T[] {
     return ret;
 }
 
-export function remove<T>(v : Array<T>, x : T){
+export function remove<T>(v : Array<T>, x : T, existence_check : boolean = true){
     const idx = v.indexOf(x);
-    assert(idx != undefined);
-    v.splice(idx, 1);
+    if(idx == -1){
+        if(existence_check){
+            throw new MyError();
+        }
+    }
+    else{
+        v.splice(idx, 1);
+    }
 }
 
 export function sum(v : number[]) : number {

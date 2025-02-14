@@ -64,7 +64,7 @@
 
 32:The sum of the interior angles of a triangle is 180 degrees.
 
-33:We will prove this.
+33:
 
 34:Draw a line parallel to one side of the triangle and through the vertex.
 
@@ -80,7 +80,7 @@
 
 40:This completes the proof.
 
-41:We will draw the angle bisector.
+41:Draw the angle bisector.
 
 42:Draw an arc.
 
@@ -226,7 +226,7 @@
 
 113:Perpendicular line (proof)
 
-114:Vertical angles are equal.
+114:
 
 115:The distance between two parallel lines is equal.
 
@@ -316,7 +316,7 @@
 
 158:Since the distance between two parallel lines is constant,
 
-159:Since the two circles have the same radius,
+159:
 
 160:Since the two triangles are congruent,
 
@@ -332,7 +332,7 @@
 
 166:Since these angles are formed by the angle bisectors,
 
-167:Since the two triangles are congruent,
+167:
 
 168:Since the diagonals of a parallelogram are congruent,
 
@@ -360,6 +360,12 @@
 
 180:the two triangles are similar.
 
-181:Draw the angle bisector.
+181:
 
 182:Draw a circle.
+
+183:Since the midpoint bisects the line segment,
+
+184:no reason
+
+185:click the common circle.
