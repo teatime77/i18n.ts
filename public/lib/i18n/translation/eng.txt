@@ -481,3 +481,23 @@
 240:condition
 
 241:property
+
+242:Reason for length equality
+
+243:Reason for angle equality
+
+244:Shape type
+
+245:Reason for parallelogram
+
+246:Reason for rhombus
+
+247:Reason for isosceles triangle
+
+248:Reason for parallel
+
+249:Equation derived from shapes
+
+250:Types of formula transformation
+
+251:The triangle is an isosceles triangle.
