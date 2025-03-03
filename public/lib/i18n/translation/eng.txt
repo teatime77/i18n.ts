@@ -62,7 +62,7 @@
 
 31:This completes the proof that the vertical angles are equal.
 
-32:The sum of the interior angles of a triangle is 180 degrees.
+32:The sum of the interior angles of a triangle is π.
 
 33:
 
@@ -369,3 +369,115 @@
 184:no reason
 
 185:click the common circle.
+
+186:new document
+
+187:add folder
+
+188:rename
+
+189:delete
+
+190:Do you want to start the conversion?
+
+191:Do you want to start the backup?
+
+192:Do you want to copy all data?
+
+193:Draw a point on the circle.
+
+194:Draw a point on the arc.
+
+195:Draw a length symbol.
+
+196:Draw a perpendicular line from the point to the line.
+
+197:Draw a perpendicular line.
+
+198:Find the intersection of the circle and the line.
+
+199:Find the intersection of the circle and the arc.
+
+200:Draw tangents to the two circles.
+
+201:Draw a tangent line from the point to the circle.
+
+202:length symbols are not on the same line.
+
+203:no connection point of two length symbols
+
+204:Since the sum of the angles is π,
+
+205:Since the sum of the angles is equal,
+
+206:Since the sum of the lengths is equal,
+
+207:Since the sum of the interior angles of a triangle is π,
+
+208:Since the sum of the interior angles of a quadrilateral is 2 π,
+
+209:Since the exterior angle of a triangle equals the sum of two remote interior angles,
+
+210:Since the base angles of an isosceles triangle are equal,
+
+211:Since two sides are equal in length,
+
+212:Since corresponding angles or alternate angles are equal,
+
+213:Since the sum of the two interior angles on the same side is π,
+
+214:The selected shapes are not named angles.
+
+215:The vertices of the angles do not match.
+
+216:Transpose the term.
+
+217:From the above equations,
+
+218:Add two equations together.
+
+219:Substitute the term.
+
+220:Dividing an equation by the same term.
+
+221:Enter a mathematical expression.
+
+222:click two parallel lines.
+
+223:The name of the shape is blank.
+
+224:triangle similarity
+
+225:equal length
+
+226:equal angle
+
+227:parallel detector
+
+228:equality constraint
+
+229:assumption
+
+230:parallel constraint
+
+231:perpendicular constraint
+
+232:quadrilateral classifier
+
+233:shape equation
+
+234:expression transformation
+
+235:If a line intersects two other lines and the sum of the two interior angles on the same side is π, then the two lines are parallel.
+
+236:The sum of the interior angles of a quadrilateral is 2 π.
+
+237:A quadrilateral with opposite angles equal is a parallelogram.
+
+238:exterior angle theorem
+
+239:inscribed angle theorem
+
+240:condition
+
+241:property

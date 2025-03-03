@@ -21,6 +21,7 @@ export let  latinLetters : string;
 export let  upperGreekLetters : string;
 export let  lowerGreekLetters : string;
 
+export let EngTextToId : Map<string, number>;
 let TextToId : Map<string, number>;
 
 const languages : ([string, string, [string,string]])[] = [
@@ -419,6 +420,7 @@ async function getTranslationMap(lang_code : string) : Promise<[Map<number, stri
 
 export async function loadTranslationMap() {
     const [id_to_text1, text_to_id1] = await getTranslationMap("eng");
+    EngTextToId = text_to_id1;
 
     if(textLanguageCode == "eng"){
         TextToId = text_to_id1;
