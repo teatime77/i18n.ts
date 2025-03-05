@@ -184,7 +184,7 @@ export async function getAllTexts() {
 export function TT(text : string) : string {
     text = text.trim();
 
-    if(textLanguageCode == "eng"){
+    if(text == "" || textLanguageCode == "eng"){
         return text;
     }
 
