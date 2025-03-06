@@ -4,6 +4,7 @@ let urlOrigin : string;
 let urlParams : Map<string, string>;
 
 export let appMode : AppMode;
+export let isEdge : boolean = false;
 
 export enum AppMode {
     edit,
@@ -444,7 +445,23 @@ export async function loadTranslationMap() {
     msg(`translation-Map size:${translationMap.size} max:${maxTranslationId}`);
 }
 
+function checkBrowser(){
+    if((navigator as any).userAgentData != undefined){
+        const brands = (navigator as any).userAgentData.brands;
+        for(const brand of brands){
+            if((brand.brand as string).includes("Edge")){
+                isEdge = true;
+                msg("is Edge : true");
+            }
+            msg(`userAgentData:[${brand.brand}]`)
+        }
+    }
+    msg(`userAgent:[${navigator.userAgent}]`);
+}
+
 export async function initI18n(){
+    checkBrowser();
+
     initLetters();
 
     for(const [name, code, quotes] of languages){
