@@ -503,3 +503,5 @@
 251:The triangle is an isosceles triangle.
 
 252:Types of proposition
+
+253:Draw an angle.
