@@ -1,8 +1,10 @@
-namespace movie_ts{
+namespace i18n_ts{
 
 export let voiceLanguageCode : string = "eng";
+export let onSpeak : (text : string) => void;
+export let isFastForward : ()=>boolean;
 
-const PlayMode = plane_ts.PlayMode;
+let cancelSpeechFlag : boolean = false;
 
 const voiceMap = new Map<string, SpeechSynthesisVoice[]>();
 
@@ -38,6 +40,10 @@ const voiceNamesDic : { [lang: string]: string[] } = {
 };
 
 let languageRegion : string;
+
+export function setVoiceLanguageCode(code : string){
+    voiceLanguageCode = code;
+}
 
 function getVoiceByLangCode(lang_code : string) : SpeechSynthesisVoice | undefined {
     languageRegion = langCodeMap.get(lang_code)!;
@@ -96,22 +102,6 @@ export class Speech extends i18n_ts.AbstractSpeech {
     }
 
     emulate(speech_id : number | undefined){
-        if(theDoc == undefined){
-            throw new MyError();
-        }
-
-        if(speech_id != undefined){
-
-            let doc_speeches = docSpeeches.find(x => x.docId == theDoc!.id)
-            if(doc_speeches == undefined){
-                doc_speeches
-                docSpeeches.push( { docId:theDoc.id, name : theDoc.name, speechIds : [speech_id]  } );
-            }
-            else{
-                doc_speeches.speechIds.push(speech_id);
-            }
-        }
-
         let charIndex = 0;
 
         const id = setInterval(()=>{
@@ -143,13 +133,17 @@ export class Speech extends i18n_ts.AbstractSpeech {
     }
 
     async speak(text : string) : Promise<void> {
+        cancelSpeechFlag = false;
         this.speaking = true;
         this.text = text;
-        Plane.one.narration_box.setText(text);
+
+        if(onSpeak != undefined){
+            onSpeak(text);
+        }
 
         const speech_id = i18n_ts.getIdFromText(this.text);
 
-        if(Plane.one.playMode == PlayMode.fastForward){
+        if(isFastForward()){
 
             this.emulate(speech_id);
             return;
@@ -216,7 +210,7 @@ export class Speech extends i18n_ts.AbstractSpeech {
     waitEnd() : Promise<void> {
         return new Promise((resolve) => {
             const id = setInterval(()=>{
-                if(stopPlayFlag || ! this.speaking){
+                if(cancelSpeechFlag || ! this.speaking){
                     clearInterval(id);
                     resolve();
                 }
@@ -332,6 +326,7 @@ export async function asyncInitSpeech() : Promise<void> {
 }
 
 export function cancelSpeech(){
+    cancelSpeechFlag = true;
     speechSynthesis.cancel();
 }
 
