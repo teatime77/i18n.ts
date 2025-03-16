@@ -505,3 +505,9 @@
 252:Types of proposition
 
 253:Draw an angle.
+
+254:Set the angle mark.
+
+255:Set the line kind.
+
+256:Set the name.
