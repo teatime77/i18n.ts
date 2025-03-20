@@ -75,13 +75,17 @@ function getVoiceByLangCode(lang_code : string) : SpeechSynthesisVoice | undefin
 }
 
 export class Speech extends i18n_ts.AbstractSpeech {
+    static maxId = 0;
+
+    id     : number;
     voice? : SpeechSynthesisVoice;
     text!   : string;
 
     constructor(){ 
         super();
-
+        
         i18n_ts.AbstractSpeech.one = this;
+        this.id = Speech.maxId++;
 
         this.initVoice();
     }
@@ -133,11 +137,18 @@ export class Speech extends i18n_ts.AbstractSpeech {
 
     async speak(text : string) : Promise<void> {
         cancelSpeechFlag = false;
+
+        this.text = text.trim();
+        if(this.text == ""){
+
+            this.speaking = false;
+            return;
+        }
+
         this.speaking = true;
-        this.text = text;
 
         if(onSpeak != undefined){
-            onSpeak(text);
+            onSpeak(this.text);
         }
 
         const speech_id = i18n_ts.getIdFromText(this.text);
@@ -158,11 +169,11 @@ export class Speech extends i18n_ts.AbstractSpeech {
 */
 
         this.initVoice();
-        msg(`Speak [${text}] ${this.voice != undefined ? this.voice.name : "no voice"}`);
+        msg(`Speak ${this.id}[${this.text}] ${this.voice != undefined ? this.voice.name : "no voice"}`);
 
         this.prevCharIndex = 0;
     
-        const uttr = new SpeechSynthesisUtterance(text.replaceAll("○", "マル").replaceAll("×", "バツ"));
+        const uttr = new SpeechSynthesisUtterance(this.text.replaceAll("○", "マル").replaceAll("×", "バツ"));
 
         uttr.addEventListener("end", this.onEnd.bind(this));
         uttr.addEventListener("boundary", this.onBoundary.bind(this));
@@ -196,7 +207,7 @@ export class Speech extends i18n_ts.AbstractSpeech {
     }
 
     onEnd(ev: SpeechSynthesisEvent) : void {
-        // msg(`Speech end: idx:${ev.charIndex} name:${ev.name} type:${ev.type} text:[${this.text.substring(this.prevCharIndex)}]`);
+        msg(`Speech end: id:${this.id} idx:${ev.charIndex} name:${ev.name} type:${ev.type} text:[${this.text.substring(this.prevCharIndex)}]`);
         if(this.callback != undefined){
             this.callback(this.text.length);
         }
@@ -206,22 +217,23 @@ export class Speech extends i18n_ts.AbstractSpeech {
     onMark(ev: SpeechSynthesisEvent) : void {
     }
 
-    async waitEnd(){
+    async waitEndNEW(){
         for(const i of range(100)){
             if(cancelSpeechFlag || ! this.speaking){
                 break;
             }
-            // msg(`wait end:${i}`);
             await sleep(10);
         }
 
+        msg(`wait end:${this.id}`);
     }
 
-    waitEndOLD() : Promise<void> {
+    waitEnd() : Promise<void> {
         return new Promise((resolve) => {
             const id = setInterval(()=>{
                 if(cancelSpeechFlag || ! this.speaking){
                     clearInterval(id);
+                    msg(`wait end:${this.id}`);
                     resolve();
                 }
             }, 10);
