@@ -2,7 +2,6 @@ namespace i18n_ts{
 
 export let voiceLanguageCode : string = "eng";
 export let onSpeak : (text : string) => void;
-export let isFastForward : ()=>boolean;
 
 let cancelSpeechFlag : boolean = false;
 
@@ -143,7 +142,7 @@ export class Speech extends i18n_ts.AbstractSpeech {
 
         const speech_id = i18n_ts.getIdFromText(this.text);
 
-        if(isFastForward()){
+        if(getPlayMode() == PlayMode.fastForward){
 
             this.emulate(speech_id);
             return;
@@ -207,7 +206,18 @@ export class Speech extends i18n_ts.AbstractSpeech {
     onMark(ev: SpeechSynthesisEvent) : void {
     }
 
-    waitEnd() : Promise<void> {
+    async waitEnd(){
+        for(const i of range(100)){
+            if(cancelSpeechFlag || ! this.speaking){
+                break;
+            }
+            // msg(`wait end:${i}`);
+            await sleep(10);
+        }
+
+    }
+
+    waitEndOLD() : Promise<void> {
         return new Promise((resolve) => {
             const id = setInterval(()=>{
                 if(cancelSpeechFlag || ! this.speaking){
@@ -291,7 +301,7 @@ function initSpeechSub(){
         msg("このブラウザは音声合成に対応しています。🎉");
 
         const speech = new Speech();
-        // speech.speak("hello");
+        speech.speak("hello");
     }
     else {
         msg("このブラウザは音声合成に対応していません。😭");

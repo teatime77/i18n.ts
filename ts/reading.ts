@@ -253,17 +253,6 @@ export abstract class  AbstractSpeech {
     abstract speak_waitEnd(text : string) : Promise<void>;
 }
 
-export class DummySpeech extends AbstractSpeech {
-    async speak(text : string) : Promise<void> {
-    }
-
-    async waitEnd() : Promise<void> {
-    }
-    
-    async speak_waitEnd(text : string) : Promise<void> {
-    }
-}
-
 export interface Readable {
     reading() : Reading;
     highlight(on : boolean) : void;

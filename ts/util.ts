@@ -2,7 +2,23 @@
 namespace i18n_ts {
 //
 
+export enum PlayMode {
+    stop,
+    normal,
+    fastForward,
+}
+
+let thePlayMode : PlayMode  = PlayMode.stop;
+
 const $dic = new Map<string, HTMLElement>();
+
+export function setPlayMode(play_mode : PlayMode){
+    thePlayMode = play_mode;
+}
+
+export function getPlayMode(){
+    return thePlayMode;
+}
 
 export function $(id : string) : HTMLElement {
     let ele = $dic.get(id);
@@ -46,6 +62,22 @@ export function check(b : boolean, msg : string = ""){
 
 export function msg(txt : string){
     console.log(txt);
+}
+
+export async function sleep(milliseconds : number, fast_sleep : number = 1) : Promise<void> {
+    if(thePlayMode == PlayMode.fastForward){
+        assert(fast_sleep == 1);
+        milliseconds = fast_sleep;
+    }
+    if(1 < milliseconds){
+        // msg(`sleep:[${milliseconds}]`);
+    }
+
+    return new Promise((resolve) => {
+        setTimeout(()=>{
+            resolve();
+        }, milliseconds);
+    });
 }
 
 export function range(n: number) : number[]{
