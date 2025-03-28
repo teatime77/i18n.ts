@@ -207,7 +207,7 @@ export class Speech extends i18n_ts.AbstractSpeech {
     }
 
     onEnd(ev: SpeechSynthesisEvent) : void {
-        msg(`Speech end: id:${this.id} idx:${ev.charIndex} name:${ev.name} type:${ev.type} text:[${this.text.substring(this.prevCharIndex)}]`);
+        // msg(`Speech end: id:${this.id} idx:${ev.charIndex} name:${ev.name} type:${ev.type} text:[${this.text.substring(this.prevCharIndex)}]`);
         if(this.callback != undefined){
             this.callback(this.text.length);
         }
@@ -225,7 +225,7 @@ export class Speech extends i18n_ts.AbstractSpeech {
             await sleep(10);
         }
 
-        msg(`wait end:${this.id}`);
+        // msg(`wait end:${this.id}`);
     }
 
     waitEnd() : Promise<void> {
@@ -233,7 +233,7 @@ export class Speech extends i18n_ts.AbstractSpeech {
             const id = setInterval(()=>{
                 if(cancelSpeechFlag || ! this.speaking){
                     clearInterval(id);
-                    msg(`wait end:${this.id}`);
+                    // msg(`wait end:${this.id}`);
                     resolve();
                 }
             }, 10);
