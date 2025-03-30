@@ -312,8 +312,6 @@ function initSpeechSub(){
     if ('speechSynthesis' in window) {
         msg("このブラウザは音声合成に対応しています。🎉");
 
-        const speech = new Speech();
-        speech.speak("hello");
     }
     else {
         msg("このブラウザは音声合成に対応していません。😭");
