@@ -84,8 +84,17 @@ export function range(n: number) : number[]{
     return [...Array(n).keys()];
 }
 
+export function range2(start: number, end : number) : number[]{
+    return range(end - start).map(x => start + x);
+}
+
 export function last<T>(v : Array<T>) : T {
     return v[v.length - 1];
+}
+
+
+export function arrayFill<T>(size : number, value : T) : T[] {
+    return new Array<T>(size).fill(value);
 }
 
 export function unique<T>(v : Array<T>) : T[] {
