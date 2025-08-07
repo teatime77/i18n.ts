@@ -121,6 +121,12 @@ export function remove<T>(v : Array<T>, x : T, existence_check : boolean = true)
     }
 }
 
+export function append<T>(v : Array<T>, x : T){
+    if(! v.includes(x)){
+        v.push(x);
+    }
+}
+
 export function sum(v : number[]) : number {
     return v.reduce((acc, cur) => acc + cur, 0);
 }
