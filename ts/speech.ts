@@ -151,9 +151,9 @@ export class Speech extends i18n_ts.AbstractSpeech {
             onSpeak(this.text);
         }
 
-        const speech_id = i18n_ts.getIdFromText(this.text);
-
         if(getPlayMode() == PlayMode.fastForward){
+
+            const speech_id = i18n_ts.getIdFromText(this.text);
 
             this.emulate(speech_id);
             return;
@@ -282,10 +282,10 @@ function setVoiceList(){
     }
 
     for(const voice of voices){
-        // if(voice.lang == languageRegion){
+        if(voice.lang == languageRegion){
 
-            // msg(`voice lang:[${voice.lang}] name:[${voice.name}]`);
-        // }
+            msg(`voice lang:[${voice.lang}] name:[${voice.name}]`);
+        }
 
         let voice_lang = voice.lang.replaceAll("_", "-");
         const k = voice_lang.indexOf("-#");
