@@ -128,6 +128,11 @@ export function append<T>(v : Array<T>, x : T){
 }
 
 export function sum(v : number[]) : number {
+    assert(v != undefined);
+    if(v.length == 0){
+        return 0;
+    }
+    
     return v.reduce((acc, cur) => acc + cur, 0);
 }
 
