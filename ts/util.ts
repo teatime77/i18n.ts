@@ -43,8 +43,18 @@ export function $sel(id : string) : HTMLSelectElement {
 }
         
 export class MyError extends Error {
+    static visited : boolean = false;
     constructor(text : string = ""){
         super(text);
+        if(! MyError.visited){
+            MyError.visited = true;
+            if(text != ""){
+                alert(`${text}\n\n${this.stack}`);
+            }
+            else{
+                alert(this.stack);
+            }
+        }
     }
 }
 
@@ -121,6 +131,15 @@ export function remove<T>(v : Array<T>, x : T, existence_check : boolean = true)
     }
 }
 
+export function replace<T>(v : Array<T>, old_element : T, new_element : T){
+    const idx = v.indexOf(old_element);
+    if(idx == -1){
+        throw new MyError();
+    }
+
+    v[idx] = new_element;
+}
+
 export function append<T>(v : Array<T>, x : T){
     if(! v.includes(x)){
         v.push(x);
@@ -144,6 +163,40 @@ export function list<T>(set : Set<T> | undefined) : T[] {
 
         return Array.from(set);
     }
+}
+
+export function* zip<T, U>(arr1: T[], arr2: U[]): Generator<[number, T, U]> {
+    const length = Math.min(arr1.length, arr2.length);
+    for (let i = 0; i < length; i++) {
+        yield [i, arr1[i], arr2[i]];
+    }
+}
+
+/**
+ * min以上 max以下の整数の乱数を返す
+ */
+export function getRandomInt(min: number, max: number): number {
+    // Math.random() は 0以上 1未満 の小数
+    // それに (範囲の個数) を掛けて、最小値を足す
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// 例：1から6（サイコロ）
+const dice = getRandomInt(1, 6);
+
+export function shuffle<T>(array: T[]): T[] {
+    // 元の配列を壊さないようにコピーを作成
+    const result = [...array];
+
+    for (let i = result.length - 1; i > 0; i--) {
+        // 0 から i までの範囲でランダムなインデックスを選ぶ
+        const j = Math.floor(Math.random() * (i + 1));
+
+        // 要素を入れ替える（分割代入を使用）
+        [result[i], result[j]] = [result[j], result[i]];
+    }
+
+    return result;
 }
 
 export function intersection<T>(set1 : Set<T> | undefined, set2 : Set<T> | undefined) : T[] {
@@ -217,6 +270,18 @@ export async function fetchText(fileURL: string) {
     const text = await response!.text();
 
     return text;
+}
+
+export async function fetchTextResponse(fileURL: string) : Promise<string | Response> {
+    const response = await fetch(fileURL);
+    if(response.ok){
+        const text = await response!.text();
+
+        return text;
+    }
+    else{
+        return response;
+    }
 }
 
 export function parseURL(): [string, string, Map<string, string>] {
