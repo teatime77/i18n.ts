@@ -1,4 +1,5 @@
-namespace i18n_ts{
+import { AbstractSpeech, getIdFromText } from "./reading.js";
+import { MyError, msg, getPlayMode, PlayMode, range, sleep } from "./util.js";
 
 export let voiceLanguageCode : string = "eng";
 export let onSpeak : (text : string) => void;
@@ -40,6 +41,10 @@ const voiceNamesDic : { [lang: string]: string[] } = {
 
 let languageRegion : string;
 
+export function setOnSpeak(fnc : (text : string) => void){
+    onSpeak = fnc;
+}
+
 export function setVoiceLanguageCode(code : string){
     voiceLanguageCode = code;
 }
@@ -74,7 +79,7 @@ function getVoiceByLangCode(lang_code : string) : SpeechSynthesisVoice | undefin
     return voices[0];
 }
 
-export class Speech extends i18n_ts.AbstractSpeech {
+export class Speech extends AbstractSpeech {
     static maxId = 0;
 
     id     : number;
@@ -84,7 +89,7 @@ export class Speech extends i18n_ts.AbstractSpeech {
     constructor(){ 
         super();
         
-        i18n_ts.AbstractSpeech.one = this;
+        AbstractSpeech.one = this;
         this.id = Speech.maxId++;
 
         this.initVoice();
@@ -153,7 +158,7 @@ export class Speech extends i18n_ts.AbstractSpeech {
 
         if(getPlayMode() == PlayMode.fastForward){
 
-            const speech_id = i18n_ts.getIdFromText(this.text);
+            const speech_id = getIdFromText(this.text);
 
             this.emulate(speech_id);
             return;
@@ -348,7 +353,4 @@ export async function asyncInitSpeech() : Promise<void> {
 export function cancelSpeech(){
     cancelSpeechFlag = true;
     speechSynthesis.cancel();
-}
-
-    
 }

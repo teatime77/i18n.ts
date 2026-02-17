@@ -1,7 +1,8 @@
-namespace i18n_ts {
+import { $inp, assert, fetchText, isIdentifierLetter, msg, MyError, parseURL, range } from "./util.js";
 
 let urlOrigin : string;
 let urlParams : Map<string, string>;
+let urlBase   : string;
 
 export let appMode : AppMode;
 export let isEdge : boolean = false;
@@ -138,7 +139,7 @@ function initLetters(){
 }
 
 export async function getAllTexts() {
-    const [ origin, , ] = i18n_ts.parseURL();
+    const [ origin, , , urlBase ] = parseURL();
 
     const names = [
         "parser",
@@ -373,7 +374,7 @@ export class Reading {
 }
 
 async function getTranslationMap(lang_code : string) : Promise<[Map<number, string>, Map<string, number>]> {
-    const url = `${urlOrigin}/lib/i18n/translation/${lang_code}.txt?ver=${Date.now()}`;
+    const url = `${urlBase}/lib/i18n/translation/${lang_code}.txt?ver=${Date.now()}`;
     let texts = await fetchText(url);
 
     // for chinese text.
@@ -457,7 +458,7 @@ export async function initI18n(){
         quotationMarks.set(code, quotes);
     }
 
-    [ urlOrigin, , urlParams] = i18n_ts.parseURL();
+    [ urlOrigin, , urlParams, urlBase] = parseURL();
 
     if(urlParams.get("lesson") != undefined){
 
@@ -499,4 +500,3 @@ export async function bodyOnLoad(){
 
 }
 
-}

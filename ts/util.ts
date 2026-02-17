@@ -1,6 +1,4 @@
-
-namespace i18n_ts {
-//
+import { latinLetters } from "./reading.js";
 
 export enum PlayMode {
     stop,
@@ -32,6 +30,10 @@ export function $(id : string) : HTMLElement {
 
 export function $div(id : string) : HTMLDivElement {
     return $(id) as HTMLDivElement;
+}
+
+export function $dlg(id : string) : HTMLDialogElement {
+    return $(id) as HTMLDialogElement;
 }
 
 export function $inp(id : string) : HTMLInputElement {
@@ -284,11 +286,16 @@ export async function fetchTextResponse(fileURL: string) : Promise<string | Resp
     }
 }
 
-export function parseURL(): [string, string, Map<string, string>] {
+export function parseURL(): [string, string, Map<string, string>, string] {
     const url = document.location.href;
     const parser = new URL(url);
     // console.log(`href:${url} origin:${parser.origin} pathname:${parser.pathname} search:${parser.search}`)
     assert(parser.origin + parser.pathname + parser.search == url);
+
+    const k = parser.pathname.lastIndexOf("/");
+    assert(k != -1);
+    const url_base = parser.origin + parser.pathname.substring(0, k);
+    msg(`url-base: ${url_base}`)
 
     const queryString = parser.search.substring(1);
     const queries = queryString.split("&");
@@ -299,7 +306,5 @@ export function parseURL(): [string, string, Map<string, string>] {
         params.set(decodeURIComponent(key), decodeURIComponent(value));
     });
     
-    return [ parser.origin, parser.pathname, params];
-}
-
+    return [ parser.origin, parser.pathname, params, url_base];
 }
