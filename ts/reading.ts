@@ -374,7 +374,7 @@ export class Reading {
 }
 
 async function getTranslationMap(lang_code : string) : Promise<[Map<number, string>, Map<string, number>]> {
-    const url = `${urlBase}/lib/i18n/translation/${lang_code}.txt?ver=${Date.now()}`;
+    const url = `${urlBase}/../i18n/translation/${lang_code}.txt?ver=${Date.now()}`;
     let texts = await fetchText(url);
 
     // for chinese text.
