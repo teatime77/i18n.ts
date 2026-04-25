@@ -286,6 +286,19 @@ export async function fetchTextResponse(fileURL: string) : Promise<string | Resp
     }
 }
 
+export async function fetchJson(url : string) {
+    const resp = await fetchTextResponse(url);
+    if(resp instanceof Response){
+        msg(`fetch json error:${resp.statusText}`);
+        throw new MyError();
+    }
+    else{
+        const obj  = JSON.parse(resp);
+        return obj;
+    }
+}
+
+
 export function parseURL(): [string, string, Map<string, string>, string] {
     const url = document.location.href;
     const parser = new URL(url);
@@ -307,4 +320,27 @@ export function parseURL(): [string, string, Map<string, string>, string] {
     });
     
     return [ parser.origin, parser.pathname, params, url_base];
+}
+
+export function downloadJson(name : string, data : any){
+    // Convert the object to a JSON string
+    const jsonData = JSON.stringify(data, null, 2); // The last two arguments are for formatting (indentation)
+
+    // Create a Blob from the JSON string
+    const blob = new Blob([jsonData], { type: "application/json" });
+
+    // Create an anchor element
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `${name}.json`; // Set the filename
+
+    // Append the link to the body (it must be in the document to be clickable)
+    document.body.appendChild(link);
+
+    // Programmatically click the link to trigger the download
+    link.click();
+
+    // Clean up: remove the link and revoke the object URL
+    document.body.removeChild(link);
+    URL.revokeObjectURL(link.href);
 }
